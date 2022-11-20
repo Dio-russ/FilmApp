@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@*@using System.Security.Principal;*@
+@model IEnumerable<FilmApp.Models.Film>
+@{
+    ViewData["Title"] = "Список Фильмов";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Магазин смартфонов</title>
+</head>
+<body>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var film in Model)
+        {
+
+            <div class="col-4" style="margin-top: 28px">
+                <div class="card h-100">
+                    <a href="/Overview/Info?id=@film.Id"><img src="@film.Img" width="100%" height="100%" style="object-fit:cover" class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@film.Name</h5>
+                        <p class="card-text">@film.Description</p>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</body>
+</html>

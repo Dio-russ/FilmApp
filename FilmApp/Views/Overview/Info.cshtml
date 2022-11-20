@@ -1,0 +1,64 @@
+﻿@using FilmApp.Controllers
+@model FilmApp.Models.Film;
+
+@{
+    ViewData["Title"] = "Info";
+}
+<div class="flex" style="background-color:#ffffff;height:100%">
+    <div class="row flex-nowrap ">
+        <div style="width:300px;height:450px;">
+            <h4 style="margin-left: 410px;margin-top:10px">@Model.Name</h4>
+            <img src="@Model.Img" width="300" height="450" alt="..." style="margin-left: 70px;">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a style="margin-left: 70px;" asp-action="Add" asp-controller="Wathched" asp-route-id="@Model.Id">Добавить в мои фильмы</a>
+                <a style="margin-left: 70px;" asp-action="Remove" asp-controller="Wathched" asp-route-id="@Model.Id">удалить из моих фильмов</a>
+            }
+        </div>        
+        <div style="margin-left: 100px">
+            <dl style="margin-top:100px">               
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Director)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Director)
+                </dd>
+                @if (Model.CountOfSeries > 1)
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.CountOfSeries)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.CountOfSeries)
+                    </dd>
+                }
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+            <iframe width="500px" height="315" src="@Model.Treiler" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-left:17px"></iframe>
+        </div>
+    </div>
+    @if (User.IsInRole("admin"))
+    {
+        <a asp-action="Edit" asp-controller="Film" asp-route-id="@Model.Id">Изменить</a>
+        <a asp-action="Delete" asp-controller="Film" asp-route-id="@Model.Id">Удалить</a>
+       
+    }
+</div>
+
